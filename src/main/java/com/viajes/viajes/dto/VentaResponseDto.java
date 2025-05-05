@@ -1,57 +1,38 @@
-package com.viajes.viajes.dto;
+package com.viajes.viajes.dto; // Ubicado en src/main/java/com/viajes/viajes/dto
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
-public class VentaResponseDto {
+// --- Clases necesarias para HATEOAS ---
+import org.springframework.hateoas.RepresentationModel;
+// Puedes necesitar Link si lo usas directamente, pero RepresentationModel ya lo maneja
+// import org.springframework.hateoas.Link;
+// ------------------------------------
 
-    private Long id; // Incluimos el ID generado
-    private String producto; // Incluimos el campo producto
+// Asumiendo que usas Lombok para getters/setters y constructores
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+
+@Data // Genera getters, setters, equals, hashCode, toString
+@NoArgsConstructor // Genera constructor sin argumentos
+@AllArgsConstructor // Genera constructor con todos los argumentos
+// --- ¡IMPORTANTE: Extender de RepresentationModel para HATEOAS! ---
+public class VentaResponseDto extends RepresentationModel<VentaResponseDto> {
+
+    private Long id; // ID de la venta
+    private String producto;
     private LocalDate fecha;
     private BigDecimal monto;
 
-    public VentaResponseDto() {
-    }
+    // No añadas un campo para los enlaces (_links) aquí,
+    // RepresentationModel ya lo maneja internamente.
 
-    // Constructor para mapear desde la entidad (útil en el servicio)
-    public VentaResponseDto(Long id, String producto, LocalDate fecha, BigDecimal monto) {
-        this.id = id;
-        this.producto = producto;
-        this.fecha = fecha;
-        this.monto = monto;
-    }
-
-    // Getters y Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getProducto() {
-        return producto;
-    }
-
-    public void setProducto(String producto) {
-        this.producto = producto;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public BigDecimal getMonto() {
-        return monto;
-    }
-
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
-    }
+    // Si NO usas Lombok, debes tener getters y setters manuales aquí:
+    /*
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    // ... otros getters y setters para producto, fecha, monto ...
+    */
 }

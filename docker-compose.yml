@@ -1,0 +1,25 @@
+version: '3'
+services:
+  viajes-app:
+    image: guslaloduoc/viajes-app:latest #
+    ports:
+      # Mapea el puerto 8080 del host al puerto 8080 del contenedor
+      - "8081:8080" # <--- PUERTO DIFERENTE AL DE ENVIOS (8080) para evitar conflicto si corren ambos en el mismo host
+    environment:
+      # Variables de entorno para la conexión a tu base de datos Oracle Cloud 
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@fs2_high?TNS_ADMIN=/app/wallet
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=Duoc@.,2025a 
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=oracle.jdbc.driver.OracleDriver
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none 
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.OracleDialect
+      - SPRING_JPA_SHOW_SQL=true 
+      - TNS_ADMIN=/app/wallet 
+      - LOGGING_LEVEL_COM_VIAJES=INFO
+    networks:
+      - app-network 
+
+# Define la red
+networks:
+  app-network:
+    driver: bridge # Define una red bridge

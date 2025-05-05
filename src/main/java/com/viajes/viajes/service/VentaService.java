@@ -15,6 +15,8 @@ public interface VentaService {
 
     DailyEarningsResponseDto calculateDailyEarnings(LocalDate date);
 
+    VentaResponseDto getVentaById(Long id);
+
     VentaResponseDto updateVenta(Long id, VentaRequestDto ventaRequestDto);
 
     void deleteVenta(Long id);

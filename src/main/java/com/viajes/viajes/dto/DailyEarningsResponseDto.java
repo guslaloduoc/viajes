@@ -1,38 +1,41 @@
-package com.viajes.viajes.dto; // Ubicado en src/main/java/com/viajes/viajes/dto
+package com.viajes.viajes.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class DailyEarningsResponseDto {
+import org.springframework.hateoas.RepresentationModel;
 
-    private LocalDate fecha;
-    private BigDecimal totalGanancias;
+public class DailyEarningsResponseDto extends RepresentationModel<DailyEarningsResponseDto> {
 
-    // Constructor vacío
-    public DailyEarningsResponseDto() {
-    }
+private LocalDate fecha;
+private BigDecimal totalGanancias;
 
-    // Constructor con campos
-    public DailyEarningsResponseDto(LocalDate fecha, BigDecimal totalGanancias) {
-        this.fecha = fecha;
-        this.totalGanancias = totalGanancias;
-    }
+// Constructor vacío (mantenido)
+public DailyEarningsResponseDto() {
+ }
 
-    // Getters y Setters
+// Constructor con campos (mantenido)
+public DailyEarningsResponseDto(LocalDate fecha, BigDecimal totalGanancias) {
+ this.fecha = fecha;
+this.totalGanancias = totalGanancias;
+}
 
-    public LocalDate getFecha() {
-        return fecha;
-    }
+// Getters y Setters (mantenidos)
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
+public LocalDate getFecha() {
+return fecha;
+}
 
-    public BigDecimal getTotalGanancias() {
-        return totalGanancias;
-    }
+public void setFecha(LocalDate fecha) {
+this.fecha = fecha;
+}
 
-    public void setTotalGanancias(BigDecimal totalGanancias) {
-        this.totalGanancias = totalGanancias;
-    }
+public BigDecimal getTotalGanancias() {
+ return totalGanancias;
+}
+
+public void setTotalGanancias(BigDecimal totalGanancias) {
+ this.totalGanancias = totalGanancias;
+}
+
 }

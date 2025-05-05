@@ -9,6 +9,7 @@ import com.viajes.viajes.repository.VentaRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Optional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -85,6 +86,24 @@ public class VentaServiceImpl implements VentaService {
                 updatedVenta.getFecha(),
                 updatedVenta.getMonto());
     }
+
+    // --- Implementación del método getVentaById ---
+@Override
+@Transactional(readOnly = true) // Es una operación de solo lectura
+public VentaResponseDto getVentaById(Long id) {
+// Buscar la venta por su ID. findById retorna un Optional.
+ Optional<Venta> ventaOptional = ventaRepository.findById(id);
+
+ // Si la venta no se encuentra, lanzar la excepción personalizada
+Venta venta = ventaOptional.orElseThrow(() -> new ResourceNotFoundException("Venta no encontrada con ID: " + id));
+
+// Convertir la entidad Venta encontrada a DTO de respuesta
+return new VentaResponseDto(
+venta.getId(),
+venta.getProducto(),
+venta.getFecha(),
+venta.getMonto());
+}
 
     // *** Implementación del método para eliminar ***
     @Override
